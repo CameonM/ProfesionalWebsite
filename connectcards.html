@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Professional Portfolio</title>
+   <style>
+      /* Basic Reset and General Styles */
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        background-color: #111;
+        color: #eee;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .section {
+        background-color: #222;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .section h2 {
+        color: #00bcd4;
+        margin-bottom: 1.5rem;
+        border-bottom: 3px solid #00bcd4;
+        padding-bottom: 0.8rem;
+        font-size: 1.8rem;
+      }
+
+      /* Profile Section */
+      .profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2.5rem;
+        text-align: center;
+      }
+
+      .profile-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .profile img {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 4px solid #00bcd4;
+      }
+
+      .profile h1 {
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .download-resume {
+        padding: 0.8rem 1.5rem;
+        background-color: #00bcd4;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .download-resume:hover {
+        background-color: #0097a7;
+        transform: scale(1.05);
+      }
+
+      /* Skill Bar Styles */
+      .skill-bar-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .skill {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .skill-name {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        color: #ddd;
+      }
+
+      .skill-bar-wrapper {
+        position: relative;
+        height: 1.5rem;
+        background: #444;
+        border-radius: 1rem;
+        overflow: hidden;
+      }
+
+      .skill-bar {
+        position: relative;
+        height: 100%;
+        width: var(--percent);
+        background: linear-gradient(to right, red, yellow, green);
+        border-radius: 1rem;
+      }
+
+      .skill-marker {
+        position: absolute;
+        top: -2.5rem;
+        left: calc(var(--percent) - 20px);
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      .skill-marker::before {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 20px solid #00bcd4;
+      }
+
+      /* Studies and Contact Sections */
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 1.5rem;
+      }
+
+      li h3 {
+        color: #00bcd4;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Contact Section */
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .contact-info div {
+        display: flex;
+        align-items: center;
+      }
+
+      .contact-info span {
+        color: #ddd;
+        margin-right: 1rem;
+      }
+
+      .contact-info a {
+        color: #00bcd4;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .contact-info a:hover {
+        color: #0097a7;
+      }
+
+      /* Footer */
+      footer {
+        width: 100%;
+        text-align: center;
+        padding: 1.5rem 0;
+        background-color: #1a1a1a;
+        color: #ddd;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      /* Projects Section */
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+
+      .project {
+        background-color: #333;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .project h3 {
+        color: #00bcd4;
+        margin-bottom: 1rem;
+      }
+
+      .project p {
+        color: #ddd;
+      }
+
+      .project a {
+        color: #00bcd4;
+        text-decoration: none;
+      }
+
+      .project a:hover {
+        color: #0097a7;
+      }
+
+      /* Awards Section */
+      .awards {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .award {
+        background-color: #333;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .award h3 {
+        color: #00bcd4;
+        margin-bottom: 1rem;
+      }
+
+      .award p {
+        color: #ddd;
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 1024px) {
+        .projects {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .profile {
+          flex-direction: column;
+        }
+
+        .profile-info {
+          align-items: center;
+        }
+
+        .projects {
+          grid-template-columns: 1fr;
+        }
+
+        .awards {
+          gap: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 1rem;
+        }
+
+        .section h2 {
+          font-size: 1.5rem;
+        }
+
+        .profile h1 {
+          font-size: 1.8rem;
+        }
+
+        .download-resume {
+          padding: 0.6rem 1.2rem;
+        }
+
+        .skill-name, .skill-bar-wrapper {
+          font-size: 1rem;
+        }
+      }
+   </style>
+</head>
+<body>
+
+   <div class="container">
+      <div class="profile">
+        <div class="profile-info">
+          <img src="images/headshot.png" alt="Profile Picture">
+           <div>
+              <h1>Cameron Mann</h1>
+              <p>Student/Entrepreneur</p>
+           </div>
+        </div>
+        <a href="images/CResume.pdf" class="download-resume" download>Download Resume</a>
+      </div>
+
+      <!-- About Section -->
+      <div class="section">
+        <h2>About</h2>
+        <p>Cameron Mann is a highly motivated student pursuing a degree in Informatics/Itnelligent Systems at Indiana University, maintaining a strong academic record. With hands-on experience in technical projects and internships, Cameron has developed proficiency in a variety of programming languages and tools. Passionate about leveraging technology to solve real-world problems, Cameron is eager to apply their skills and continue learning in a professional environment.</p>
+      </div>
+
+      <!-- Education Section -->
+      <div class="section">
+        <h2>Education</h2>
+        <ul>
+           <li>
+              <h3>Indiana University | Bachelor of Science</h3>
+              <p>Major: Informatics/Intelligent Systems</p>
+              <p>Minor: Business</p>
+              <p>GPA: 4.0 | Dean's List</p>
+           </li>
+           <li>
+              <h3>New Palestine High School</h3>
+              <p>Core 40 with Academic & Technical Honors</p>
+              <p>GPA: 4.182</p>
+           </li>
+        </ul>
+      </div>
+
+      <!-- Skills Section -->
+           <div class="section">
+            <h2>Skills</h2>
+            <div class="skill-bar-container">
+               <div class="skill">
+                  <span class="skill-name">Project Management</span>
+                  <div class="skill-bar-wrapper">
+                     <div class="skill-bar" style="--percent: 100%;"></div>
+                     <div class="skill-marker" style="--percent: 100%;">100%</div>
+                  </div>
+               </div>
+               <div class="skill">
+                  <span class="skill-name">Problem Solving</span>
+                  <div class="skill-bar-wrapper">
+                     <div class="skill-bar" style="--percent: 100%;"></div>
+                     <div class="skill-marker" style="--percent: 100%;">100%</div>
+                  </div>
+               </div>
+               <div class="skill">
+                  <span class="skill-name">Communication</span>
+                  <div class="skill-bar-wrapper">
+                     <div class="skill-bar" style="--percent: 100%;"></div>
+                     <div class="skill-marker" style="--percent: 100%;">100%</div>
+                  </div>
+               </div>
+               <div class="skill">
+                  <span class="skill-name">HTML/CSS</span>
+                  <div class="skill-bar-wrapper">
+                     <div class="skill-bar" style="--percent: 95%;"></div>
+                     <div class="skill-marker" style="--percent: 95%;">95%</div>
+                  </div>
+               </div>
+               <div class="skill">
+                  <span class="skill-name">Visual Studio Code</span>
+                  <div class="skill-bar-wrapper">
+                     <div class="skill-bar" style="--percent: 90%;"></div>
+                     <div class="skill-marker" style="--percent: 90%;">90%</div>
+                  </div>
+               </div>
+               <div class="skill">
+                  <span class="skill-name">GitHub</span>
+                  <div class="skill-bar-wrapper">
+                     <div class="skill-bar" style="--percent: 90%;"></div>
+                     <div class="skill-marker" style="--percent: 90%;">90%</div>
+                  </div>
+               </div>
+               <div class="skill">
+                  <span class="skill-name">Python</span>
+                  <div class="skill-bar-wrapper">
+                     <div class="skill-bar" style="--percent: 83%;"></div>
+                     <div class="skill-marker" style="--percent: 83%;">83%</div>
+                  </div>
+               </div>
+               <div class="skill">
+                  <span class="skill-name">Autodesk Fusion360</span>
+                  <div class="skill-bar-wrapper">
+                     <div class="skill-bar" style="--percent: 75%;"></div>
+                     <div class="skill-marker" style="--percent: 75%;">75%</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+
+      <!-- Projects Section -->
+      <div class="section">
+        <h2>Projects</h2>
+        <div class="projects">
+           <div class="project">
+              <h3>ATracker</h3>
+              <p>A time tracking app for project management.</p>
+              <a href="https://github.com/CameonM/ATracker">View Project</a>
+           </div>
+           <div class="project">
+              <h3>Professional Website</h3>
+              <p>Various tech projects and software development work.</p>
+              <a href="#">View Project</a>
+           </div>
+        </div>
+      </div>
+
+      <!-- Awards Section -->
+      <div class="section">
+        <h2>Awards</h2>
+        <div class="awards">
+           <div class="award">
+              <h3>Lilly Endowment Community Scholarship</h3>
+              <p>A prestigious scholarship awarded for academic excellence and community leadership.</p>
+           </div>
+           <div class="award">
+              <h3>Dean's List</h3>
+              <p>Recognized for outstanding academic achievement at Indiana University.</p>
+           </div>
+        </div>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="section">
+        <h2>Contact</h2>
+        <div class="contact-info">
+           <div>
+              <span>Email:</span><a href="mailto:cmmann98@gmail.com">cmmann98@gmail.com</a>
+           </div>
+           <div>
+              <span>LinkedIn:</span><a href="https://www.linkedin.com/in/cameronmann" target="_blank">linkedin.com/in/cameronmann</a>
+           </div>
+           <div>
+              <span>GitHub:</span><a href="https://github.com/CameonM" target="_blank">github.com/CameonM</a>
+           </div>
+        </div>
+      </div>
+   </div>
+
+   <footer>
+      <p>© 2024 Cameron Mann | All Rights Reserved</p>
+   </footer>
+
+</body>
+</html>
